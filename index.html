@@ -1,26 +1,14 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8" />
-  <title>Petber</title>
-  <script>
-    const path = window.location.pathname;
+<button onclick="openApp()">Open App</button>
 
-    // Ví dụ: /post/123
-    if (path.startsWith("/post/")) {
-      const postId = path.split("/")[2];
+<script>
+function openApp() {
+  const path = window.location.pathname;
+  const postId = path.split("/")[2];
 
-      // Try open app
-      window.location.href = "petber://post/" + postId;
+  window.location.href = "petber://post/" + postId;
 
-      // fallback nếu không có app
-      setTimeout(() => {
-        window.location.href = "https://play.google.com/store/apps/details?id=com.nvv.petber";
-      }, 2000);
-    }
-  </script>
-</head>
-<body>
-  <h1>Opening Petber...</h1>
-</body>
-</html>
+  setTimeout(() => {
+    window.location.href = "https://play.google.com/store/apps/details?id=com.nvv.petber";
+  }, 2000);
+}
+</script>

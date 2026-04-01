@@ -1,17 +1,31 @@
-<script>
-  const path = window.location.pathname;
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>PetBer</title>
+</head>
+<body>
+  <p>Petber opening...</p>
 
-  if (path.startsWith("/post/")) {
-    const postId = path.split("/")[2];
+  <script>
+    const path = window.location.pathname;
+    if (path.startsWith("/post/")) {
+      const postId = path.split("/")[2];
 
-    const intentUrl =
-      "intent://post/" + postId +
-      "#Intent;scheme=petber;package=com.nvv.petber;end";
+      const intentUrl = "petber://post/" + postId;
 
-    window.location.href = intentUrl;
+      // Khi user rời khỏi trang (app mở) → dừng timer
+      window.addEventListener("blur", function() {
+        clearTimeout(timer);
+      });
 
-    setTimeout(() => {
-      window.location.href = "https://play.google.com/store/apps/details?id=com.nvv.petber";
-    }, 2000);
-  }
-</script>
+      window.location.href = intentUrl;
+
+      // Chỉ redirect CH Play nếu sau 2s user vẫn còn trên trang này
+      const timer = setTimeout(() => {
+        window.location.href = "https://play.google.com/store/apps/details?id=com.nvv.petber";
+      }, 3000);
+    }
+  </script>
+</body>
+</html>
